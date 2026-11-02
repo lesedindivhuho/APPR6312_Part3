@@ -1,0 +1,25 @@
+# Shared by every stage that needs the solution restored.
+# NuGetAuthenticate lets restore read GiftOfTheGivers.Helpers from the Azure Artifacts feed in nuget.config.
+
+parameters:
+  - name: solution
+    type: string
+    default: Part1.sln
+
+steps:
+  - task: UseDotNet@2
+    displayName: Use .NET 8 SDK
+    inputs:
+      packageType: sdk
+      version: 8.x
+
+  - task: NuGetAuthenticate@1
+    displayName: Authenticate with Azure Artifacts
+
+  - task: DotNetCoreCLI@2
+    displayName: Restore
+    inputs:
+      command: restore
+      projects: ${{ parameters.solution }}
+      feedsToUse: config
+      nugetConfigPath: nuget.config

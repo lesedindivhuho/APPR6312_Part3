@@ -1,0 +1,124 @@
+@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<section class="dashboard-page" aria-labelledby="dashboard-title">
+    <header class="dashboard-header">
+        <div>
+            <p class="eyebrow">Operations centre</p>
+            <h1 id="dashboard-title">Good morning, team.</h1>
+            <p>Keep an eye on the people, supplies, and responses moving through Gift of the Givers.</p>
+        </div>
+        <a href="@Url.Action("ViewVolunteers", "Volunteer")" class="btn btn-dashboard-primary">View volunteers <span aria-hidden="true">&rarr;</span></a>
+    </header>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="dashboard-alert" role="status">@TempData["Success"]</div>
+    }
+
+    <section class="dashboard-stats" aria-label="Relief activity summary">
+        <article class="dashboard-stat dashboard-stat-featured">
+            <span class="stat-label">All donations</span>
+            <strong>@ViewBag.TotalDonationsCount</strong>
+            <span class="stat-detail">contributions recorded</span>
+        </article>
+        <article class="dashboard-stat">
+            <span class="stat-label">Money</span>
+            <strong>@ViewBag.TotalMoneyDonations</strong>
+            <span class="stat-detail">cash donations</span>
+        </article>
+        <article class="dashboard-stat">
+            <span class="stat-label">Supplies</span>
+            <strong>@(ViewBag.TotalClothesDonations + ViewBag.TotalFoodDonations)</strong>
+            <span class="stat-detail">food and clothing donations</span>
+        </article>
+        <article class="dashboard-stat dashboard-stat-green">
+            <span class="stat-label">Volunteers</span>
+            <strong>@ViewBag.TotalVolunteers</strong>
+            <span class="stat-detail">people ready to help</span>
+        </article>
+    </section>
+
+    <div class="dashboard-grid">
+        <section class="dashboard-panel dashboard-donations" aria-labelledby="latest-donations-title">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">Latest activity</p>
+                    <h2 id="latest-donations-title">Recent donations</h2>
+                </div>
+                <a href="@Url.Action("Donate", "Donor")" class="panel-link">Open donation form <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="table-wrap">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr><th>Donor</th><th>Amount</th><th>Date</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.LatestDonations != null && ViewBag.LatestDonations.Count > 0)
+                        {
+                            foreach (var donation in ViewBag.LatestDonations)
+                            {
+                                <tr>
+                                    <td>@(donation.DonorName ?? "Anonymous")</td>
+                                    <td>@donation.Currency @donation.DonationAmount</td>
+                                    <td>@donation.DonationDate.ToString("dd MMM yyyy")</td>
+                                    <td><span class="status-pill">Completed</span></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="4" class="table-empty">No money donations yet.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="dashboard-panel dashboard-updates" aria-labelledby="updates-title">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">Communication</p>
+                    <h2 id="updates-title">Project updates</h2>
+                </div>
+            </div>
+            @if (ViewBag.Updates != null && ViewBag.Updates.Count > 0)
+            {
+                <div class="update-list">
+                    @foreach (var update in ViewBag.Updates)
+                    {
+                        <article class="update-item">
+                            <span>@update.DatePosted.ToString("dd MMM yyyy")</span>
+                            <h3>@update.Title</h3>
+                            <p>@update.Message</p>
+                        </article>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="panel-empty">No project updates have been posted yet.</div>
+            }
+        </section>
+    </div>
+
+    <section class="dashboard-compose" aria-labelledby="post-update-title">
+        <div>
+            <p class="eyebrow">Keep people informed</p>
+            <h2 id="post-update-title">Post a project update.</h2>
+            <p>Share a short, useful update for the team and the communities following the response.</p>
+        </div>
+        <form asp-action="PostUpdate" method="post" class="dashboard-form">
+            <div class="form-group">
+                <label for="Title">Title</label>
+                <input id="Title" name="Title" placeholder="e.g. Winter supplies dispatched" required />
+            </div>
+            <div class="form-group">
+                <label for="Message">Message</label>
+                <textarea id="Message" name="Message" rows="4" placeholder="What should the team know?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dashboard-primary">Post update</button>
+        </form>
+    </section>
+</section>

@@ -1,0 +1,44 @@
+@model Part1.Models.Users
+@{
+    ViewData["Title"] = "Employee Login";
+    ViewData["ContainerClass"] = "container-auth";
+}
+
+<main class="auth-page">
+    <section class="auth-panel auth-panel-employee" aria-labelledby="employee-login-title">
+        <div class="auth-intro">
+            <p class="eyebrow">Team access</p>
+            <h1 id="employee-login-title">Welcome back.</h1>
+            <p>Sign in to coordinate donations, volunteers, and relief updates from one place.</p>
+            <div class="auth-role-mark">Employee portal</div>
+        </div>
+        <div class="auth-form-wrap">
+            <p class="auth-kicker">Employee login</p>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="auth-alert auth-alert-success" role="status"><strong>@TempData["Success"]</strong> Please login to continue.</div>
+            }
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="auth-alert auth-alert-error" role="alert">@ViewBag.Error</div>
+            }
+
+            <form asp-action="Login" method="post" class="auth-form">
+                <div class="form-group">
+                    <label asp-for="Username">Username</label>
+                    <input asp-for="Username" autocomplete="username" placeholder="Enter your username" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password" type="password" autocomplete="current-password" placeholder="Enter your password" required />
+                </div>
+                <button type="submit" class="btn btn-auth">Sign in</button>
+            </form>
+
+            <p class="auth-switch">Need a donor login? <a href="@Url.Action("Dlogin", "Register")">Switch to donor access</a></p>
+            <p class="auth-back"><a href="@Url.Action("Index", "Home")">&larr; Back to home</a></p>
+        </div>
+    </section>
+</main>

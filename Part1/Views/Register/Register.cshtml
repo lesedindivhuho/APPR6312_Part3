@@ -1,0 +1,55 @@
+@model Part1.Models.Users
+@{
+    ViewData["Title"] = "Create Account";
+    ViewData["ContainerClass"] = "container-auth";
+}
+
+<main class="auth-page">
+    <section class="auth-panel auth-panel-register" aria-labelledby="register-title">
+        <div class="auth-intro">
+            <p class="eyebrow">Join the response</p>
+            <h1 id="register-title">Make your help count.</h1>
+            <p>Create an account to take part as a donor or become part of the team making relief possible.</p>
+            <div class="auth-role-mark">One account, many ways to help</div>
+        </div>
+        <div class="auth-form-wrap">
+            <p class="auth-kicker">Create an account</p>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="auth-alert auth-alert-error" role="alert">@ViewBag.Error</div>
+            }
+
+            <form asp-action="RegisterUser" method="post" class="auth-form">
+                <div class="form-group">
+                    <label asp-for="Fullname">Full name</label>
+                    <input asp-for="Fullname" autocomplete="name" placeholder="Enter your full name" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Username">Username</label>
+                    <input asp-for="Username" autocomplete="username" placeholder="Choose a username" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">Email address</label>
+                    <input asp-for="Email" type="email" autocomplete="email" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password" type="password" autocomplete="new-password" placeholder="Create a password" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="role">I want to join as</label>
+                    <select asp-for="role" required>
+                        <option value="">Select a role</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Donor">Donor</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-auth">Create account</button>
+            </form>
+
+            <p class="auth-switch">Already have an account? <a href="@Url.Action("Login", "Register")">Sign in</a></p>
+            <p class="auth-back"><a href="@Url.Action("Index", "Home")">&larr; Back to home</a></p>
+        </div>
+    </section>
+</main>

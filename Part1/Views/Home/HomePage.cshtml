@@ -1,0 +1,55 @@
+﻿@model Part1.Models.Users
+<header>
+    <h2>Welcome to Gift of the Givers, where your help is always appreciated</h2>
+    <nav>
+        <a href="@Url.Action("Register", "Home")">
+            <button>Register</button>
+        </a>
+    </nav>
+</header>
+  
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Welcome to Gift of the Givers</h1>
+<p>Please select your role:</p>
+
+<div>
+    <a href="@Url.Action("Login", "Register")">Employee Login</a> |
+    <a href="@Url.Action("Dlogin", "Register")">Donor Login</a> |
+    <a href="@Url.Action("Register", "Register")">Register</a>
+</div>
+
+@{
+    ViewData["Title"] = "Homepage";
+}
+
+<h2>Welcome to the Homepage</h2>
+<p>You are logged in!</p>
+
+<div>
+    <a href="@Url.Action("Donate", "Donor")">Donate</a> |
+    <a href="@Url.Action("Volunteer", "Volunteer")">Volunteer</a> |
+    <a href="@Url.Action("Dashboard", "Employee")">Employee Dashboard</a> |
+    <a href="@Url.Action("ViewVolunteers", "Volunteer")">View Volunteers</a> |
+    <a href="@Url.Action("Index", "Home")">Logout</a>
+</div>
+      
+<!--
+<header>
+    - Defines a header for a document or a section
+    <nav>
+        - Defines a set of navigation links
+        <section>
+            - Defines a section in a document
+            <article>
+                - Defines independent, self-contained content
+                <aside>
+                    - Defines content aside from the content (like a sidebar)
+                    <footer>
+                        - Defines a footer for a document or a section
+                        <details>
+                            - Defines additional details that the user can open and close on demand
+                            <summary> - Defines a heading for the <details> element
+-->

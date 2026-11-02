@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    ViewData["ContainerClass"] = "container-landing";
+}
+
+<section class="home-page" aria-labelledby="home-title">
+    <section class="home-hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Disaster relief, powered by people</p>
+            <h1 id="home-title">Help reaches further when we stand together.</h1>
+            <p class="hero-lead">Gift of the Givers connects generous donors and committed volunteers with communities facing crisis across South Africa.</p>
+            <div class="hero-actions">
+                <a href="@Url.Action("Donate", "Donor")" class="btn btn-primary">Make a donation</a>
+                <a href="@Url.Action("Volunteer", "Volunteer")" class="btn btn-outline">Become a volunteer</a>
+            </div>
+        </div>
+        <div class="hero-note">
+            <span class="hero-note-mark">01</span>
+            <p>Every contribution becomes practical support where it matters most.</p>
+        </div>
+    </section>
+
+    <section class="impact-strip" aria-label="Our impact">
+        <div><strong>24/7</strong><span>Emergency response</span></div>
+        <div><strong>All year</strong><span>Relief programmes</span></div>
+        <div><strong>One goal</strong><span>Restore dignity</span></div>
+    </section>
+
+    <section class="home-section">
+        <div class="section-heading">
+            <p class="eyebrow">Ways to contribute</p>
+            <h2>Choose how you want to help.</h2>
+        </div>
+        <div class="action-grid">
+            <a href="@Url.Action("Donate", "Donor")" class="action-card action-card-red">
+                <span class="action-number">01</span>
+                <h3>Give what you can</h3>
+                <p>Support relief through money, clothing, or food donations.</p>
+                <span class="action-link">Donate <span aria-hidden="true">&rarr;</span></span>
+            </a>
+            <a href="@Url.Action("Volunteer", "Volunteer")" class="action-card action-card-green">
+                <span class="action-number">02</span>
+                <h3>Give your time</h3>
+                <p>Join a practical response team and put your skills to work.</p>
+                <span class="action-link">Volunteer <span aria-hidden="true">&rarr;</span></span>
+            </a>
+            <a href="@Url.Action("Register", "Register")" class="action-card action-card-gold">
+                <span class="action-number">03</span>
+                <h3>Stay connected</h3>
+                <p>Create an account to follow your contributions and updates.</p>
+                <span class="action-link">Register <span aria-hidden="true">&rarr;</span></span>
+            </a>
+        </div>
+    </section>
+
+    <section class="story-grid" aria-label="Ways to support relief work">
+        <article class="story story-donation">
+            <div class="story-image">
+                <img src="~/images/donation-box.jpg" alt="A box of food and household supplies prepared for donation" />
+            </div>
+            <div class="story-copy">
+                <p class="eyebrow">Practical support</p>
+                <h2>Small gifts become essential supplies.</h2>
+                <p>Your donation helps provide food, clothing, and emergency assistance to families rebuilding after a crisis. Every box, contribution, and act of generosity helps a response reach further.</p>
+                <a href="@Url.Action("Donate", "Donor")" class="text-link">Support a response <span aria-hidden="true">&rarr;</span></a>
+            </div>
+        </article>
+        <article class="story story-volunteer">
+            <div class="story-copy">
+                <p class="eyebrow">People in action</p>
+                <h2>Your time can move a response forward.</h2>
+                <p>Volunteers bring the skills, energy, and care that turn supplies into meaningful help. Whether you support logistics, food distribution, or administration, there is a place for you in the team.</p>
+                <a href="@Url.Action("Volunteer", "Volunteer")" class="text-link">Join the team <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="story-image">
+                <img src="~/images/volunteer.jpg" alt="A volunteer wearing a volunteer badge" />
+            </div>
+        </article>
+    </section>
+
+</section>

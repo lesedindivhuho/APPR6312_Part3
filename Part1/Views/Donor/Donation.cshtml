@@ -1,0 +1,191 @@
+﻿@{
+    ViewData["Title"] = "Donate";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #8B0000;
+            text-align: center;
+            margin: 0 0 5px 0;
+            font-size: 24px;
+        }
+
+        .sub {
+            text-align: center;
+            color: #666;
+            margin: 0 0 20px 0;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+                font-size: 14px;
+            }
+
+            .form-group input, .form-group select, .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 14px;
+                box-sizing: border-box;
+            }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .btn:hover {
+                background: #218838;
+            }
+
+        .btn-secondary {
+            background: #8B0000;
+        }
+
+            .btn-secondary:hover {
+                background: #6B0000;
+            }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+            .btn-warning:hover {
+                background: #e0a800;
+            }
+
+        .text-center {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+            .text-center a {
+                color: #8B0000;
+                text-decoration: none;
+            }
+
+        hr {
+            border: 1px solid #eee;
+            margin: 30px 0;
+        }
+
+        .section-title {
+            color: #8B0000;
+            margin: 20px 0 10px 0;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .checkbox input {
+                width: auto;
+            }
+
+        .validation-summary-errors {
+            color: #721c24;
+            background: #f8d7da;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+            .validation-summary-errors ul {
+                margin: 0;
+                padding-left: 18px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Gift of the Givers</h1>
+        <p class="sub">Make a Donation</p>
+
+        <h3 class="section-title">Donate Money</h3>
+        <form asp-action="DonateMoney" method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group"><input name="DonationAmount" type="number" step="0.01" placeholder="
+               Amount (ZAR)"
+                required /></div>
+            <div class="form-group">
+                <select name="Currency">
+                    <option value="ZAR">ZAR</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
+            </div>
+            <div class="form-group"><input name="Email" type="email" placeholder="Email" required /></div>
+            <div class="form-group checkbox"><input name="IsRecurring" type="checkbox" value="true" /> <label 
+                style="font-weight:normal;">Recurring Donation</label></div>
+            <div class="form-group"><input name="DonorName" placeholder="Your Name (optional)" /></div>
+            <button type="submit" class="btn">Donate Now</button>
+        </form>
+
+        <hr />
+
+        <h3 class="section-title">Donate Clothes</h3>
+        <form asp-action="DonateClothes" method="post">
+            <div class="form-group"><input name="Name" placeholder="Item Name" required /></div>
+            <div class="form-group"><input name="Size" placeholder="Size (S, M, L, XL)" required /></div>
+            <div class="form-group"><input name="Condition" placeholder="Condition (New, Good, Fair)" required /></div>
+            <div class="form-group"><textarea name="Description" placeholder="Description" rows="2"></textarea></div>
+            <button type="submit" class="btn btn-secondary">Donate Clothes</button>
+        </form>
+
+        <hr />
+
+        <h3 class="section-title">Donate Food</h3>
+        <form asp-action="DonateFood" method="post">
+            <div class="form-group"><input name="Name" placeholder="Food Name" required /></div>
+            <div class="form-group"><input name="Type" placeholder="Type (Canned, Fresh, Dry)" required /></div>
+            <button type="submit" class="btn btn-warning">Donate Food</button>
+        </form>
+
+        <div class="text-center"><a href="@Url.Action("Index", "Home")">Back to Home</a></div>
+    </div>
+</body>
+</html>

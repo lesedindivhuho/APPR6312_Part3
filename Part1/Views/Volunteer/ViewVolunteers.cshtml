@@ -1,0 +1,79 @@
+@model List<Part1.Models.Volunteer>
+@{
+    ViewData["Title"] = "Volunteer Management";
+}
+
+<section class="volunteer-admin" aria-labelledby="volunteer-admin-title">
+    <header class="volunteer-admin-header">
+        <div>
+            <p class="eyebrow">People in the network</p>
+            <h1 id="volunteer-admin-title">Volunteer management.</h1>
+            <p>Search applications, understand availability, and keep the response team moving.</p>
+        </div>
+        <a href="@Url.Action("Volunteer", "Volunteer")" class="btn btn-dashboard-primary">Add volunteer <span aria-hidden="true">+</span></a>
+    </header>
+
+    <div class="volunteer-toolbar">
+        <div class="volunteer-search">
+            <label class="sr-only" for="volunteer-search">Search volunteers</label>
+            <input id="volunteer-search" type="search" placeholder="Search by name, email, or skill" data-volunteer-search />
+        </div>
+        <div class="volunteer-filter-group">
+            <label class="sr-only" for="volunteer-status">Filter by status</label>
+            <select id="volunteer-status" data-volunteer-status>
+                <option value="all">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="active">Active</option>
+            </select>
+            <label class="sr-only" for="volunteer-availability">Filter by availability</label>
+            <select id="volunteer-availability" data-volunteer-availability>
+                <option value="all">All availability</option>
+                <option value="Weekdays">Weekdays</option>
+                <option value="Weekends">Weekends</option>
+                <option value="Evenings">Evenings</option>
+                <option value="Flexible">Flexible</option>
+            </select>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="volunteer-table-wrap">
+            <table class="volunteer-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Skills</th>
+                        <th>Availability</th>
+                        <th>Applied</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody data-volunteer-list>
+                    @foreach (var volunteer in Model.OrderByDescending(v => v.ApplicationDate))
+                    {
+                        <tr data-volunteer-row data-status="@volunteer.Status.ToLowerInvariant()" data-availability="@volunteer.Availability" data-search="@($"{volunteer.Fullname} {volunteer.Email} {volunteer.Skills}")">
+                            <td><strong>@volunteer.Fullname</strong></td>
+                            <td><a href="mailto:@volunteer.Email">@volunteer.Email</a><br /><span>@volunteer.Phone</span></td>
+                            <td>@volunteer.Skills</td>
+                            <td>@volunteer.Availability</td>
+                            <td>@volunteer.ApplicationDate.ToString("dd MMM yyyy")</td>
+                            <td><span class="volunteer-status volunteer-status-@volunteer.Status.ToLowerInvariant()">@volunteer.Status</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p class="volunteer-no-results" data-volunteer-empty hidden>No volunteers match these filters.</p>
+        </div>
+    }
+    else
+    {
+        <div class="volunteer-empty-state">
+            <p class="eyebrow">No applications yet</p>
+            <h2>Your volunteer network will appear here.</h2>
+            <p>Share the application link when you are ready to start building the response team.</p>
+            <a href="@Url.Action("Volunteer", "Volunteer")" class="btn btn-dashboard-primary">Open application</a>
+        </div>
+    }
+</section>

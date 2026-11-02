@@ -1,0 +1,15 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<section class="error-state" aria-labelledby="error-title">
+    <p class="eyebrow">Something went wrong</p>
+    <h1 id="error-title">We could not complete that request.</h1>
+    <p>The page may be temporarily unavailable. Return home and try again.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-dashboard-primary">Back to home</a>
+    @if (Model.ShowRequestId)
+    {
+        <p class="error-request">Reference: <code>@Model.RequestId</code></p>
+    }
+</section>

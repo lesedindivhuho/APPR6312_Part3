@@ -1,0 +1,45 @@
+@model Part1.Models.Users
+@{
+    ViewData["Title"] = "Donor Login";
+    ViewData["ContainerClass"] = "container-auth";
+}
+
+<main class="auth-page">
+    <section class="auth-panel auth-panel-donor" aria-labelledby="donor-login-title">
+        <div class="auth-intro">
+            <p class="eyebrow">Your support matters</p>
+            <h1 id="donor-login-title">Give with purpose.</h1>
+            <p>Sign in to continue your giving journey and stay connected to the work your support makes possible.</p>
+            <div class="auth-role-mark">Donor portal</div>
+        </div>
+        <div class="auth-form-wrap">
+            <p class="auth-kicker">Donor login</p>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="auth-alert auth-alert-success" role="status"><strong>@TempData["Success"]</strong> Please login to continue.</div>
+            }
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="auth-alert auth-alert-error" role="alert">@ViewBag.Error</div>
+            }
+
+            <form asp-action="Dlogin" method="post" class="auth-form">
+                <div class="form-group">
+                    <label asp-for="Username">Username</label>
+                    <input asp-for="Username" autocomplete="username" placeholder="Enter your username" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password" type="password" autocomplete="current-password" placeholder="Enter your password" required />
+                </div>
+                <button type="submit" class="btn btn-auth btn-auth-donor">Sign in</button>
+            </form>
+
+            <p class="auth-switch">Part of the response team? <a href="@Url.Action("Login", "Register")">Switch to employee access</a></p>
+            <p class="auth-register">New here? <a href="@Url.Action("Register", "Register")">Create an account</a></p>
+            <p class="auth-back"><a href="@Url.Action("Index", "Home")">&larr; Back to home</a></p>
+        </div>
+    </section>
+</main>
